@@ -7,3 +7,7 @@ psycopg2-binary
 openpyxl
 s3fs
 fastapi
+uvicorn
+python-multipart
+streamlit
+plotly
