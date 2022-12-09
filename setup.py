@@ -25,18 +25,17 @@ def run_setup( python_v:str ) -> None:
 
     '''
 )
-    #os.chdir('./src')    
+  
 
     # run etl process
+    os.chdir('./src')  
     os.system(f'{python_v} main.py')
-    os.chdir('echo ejecutando api')
-    os.chdir('../api')
-   
-    # run api server
-    subprocess.Popen([f'{python_v}','apiMain.py'])
-    os.chdir('echo ejecutando front')
-    os.chdir('../front')
     
+    # run api server
+    os.chdir('../api')
+    subprocess.Popen([f'{python_v}','apiMain.py'])
+
+    os.chdir('../front')
     subprocess.Popen(['streamlit', 'run' ,'home.py'])
 
     
