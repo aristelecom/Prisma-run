@@ -36,7 +36,8 @@ def run_setup( python_v:str ) -> None:
     subprocess.Popen([f'{python_v}','apiMain.py'])
 
     os.chdir('../front')
-    subprocess.Popen(['streamlit', 'run' ,'home.py'])
+    os.system(f'streamlit', 'run' ,'home.py')
+
 
     
 if __name__ == '__main__':
