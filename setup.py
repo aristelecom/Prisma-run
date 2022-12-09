@@ -1,38 +1,47 @@
 import os 
 import argparse
-
+import subprocess
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-pyv', type=str, required=False, help='python version por example python, python3 or py',default = 'python3')
-parser.add_argument('-ip', type=bool, required=False, help='install paquets from requieriments.txt',default = False)
+
 
 args = parser.parse_args()
 
 
-def run_setup( python_v:str, ip:bool ) -> None:
+def run_setup( python_v:str ) -> None:
     print(
     ''' 
-        | |   (_) |            / _|                             
+
+
+        | |   (_) |            / _|
         | |__  _| | _____  ___| |_ ___  _ __ _____   _____ _ __ 
         | '_ \| | |/ / _ \/ __|  _/ _ \| '__/ _ \ \ / / _ \ '__|
         | |_) | |   <  __/\__ \ || (_) | | |  __/\ V /  __/ |   
         |_.__/|_|_|\_\___||___/_| \___/|_|  \___| \_/ \___|_|  
 
 
-        
+
     '''
 )
+    os.chdir('./src')    
 
     # run etl process
-    os.system(f'{python_v} ./src/main.py')
+    os.system(f'{python_v} main.py')
 
+    os.chdir('../api')
+   
     # run api server
-    os.system(f'{python_v} ./api/apiMain.py')
+    subprocess.Popen([f'{python_v}','apiMain.py'])
 
-    # run streamlit server 
-    os.system('streamlit run ./front/home.py')
+    os.chdir('../front')
+    
+    subprocess.Popen(['streamlit', 'run' ,'home.py'])
 
-
+    
 if __name__ == '__main__':
    run_setup(args.pyv)
+
+
+
