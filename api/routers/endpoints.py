@@ -5,12 +5,12 @@ from fastapi import APIRouter, UploadFile, File
 from repository import functionality
 
 # second level
-root = Path.cwd().parent
-root = f'{root}/config_logs.conf'
+# root = Path.cwd().parent
+# root = f'{root}/config_logs.conf'
 
 # open file config
-logging.config.fileConfig(root)
-logger = logging.getLogger('API')
+# logging.config.fileConfig(root)
+# logger = logging.getLogger('API')
 
 # Define router with sets
 router = APIRouter(
@@ -31,9 +31,13 @@ def upload_file(file: UploadFile = File(...)) -> UploadFile:
         UploadFile: json file with information if the file
         was loaded or not in the system and path where was upload.
     """
-    logger.info('Function Upload -> Return file Uploaded')
+    # logger.info('Function Upload -> Return file Uploaded')
     return functionality.uploadFile(file)
 
+
+@router.post('/upload_s3')
+def upload_file_s3(file: UploadFile = File(...)) -> UploadFile:
+    return functionality.uploadFile_s3(file)
 
 @router.get('/get_data')
 def getData() -> dict:
@@ -44,5 +48,5 @@ def getData() -> dict:
         dict: dictionary with each of the paths found in the
         outputs folder with csvs
     """
-    logger.info('Funtion GetData -> Return path of file')
+    # logger.info('Funtion GetData -> Return path of file')
     return functionality.get_csv_url_files()
