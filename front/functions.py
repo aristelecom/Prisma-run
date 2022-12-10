@@ -22,8 +22,7 @@ import pandas as pd
 import streamlit as st
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__)))
-print(sys.path)
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from libs.config import settings
 
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
